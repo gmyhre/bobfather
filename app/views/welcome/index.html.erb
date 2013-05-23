@@ -1,0 +1,47 @@
+
+<hr>
+
+<div class="jumbotron">
+  <h1>Who Told You About Bob's Donuts!</h1>
+  <% if !logged_in? %>
+    <p class="lead">Sign up to explore your Bob's Donuts lineage</p>
+    <a class="" href="/auth/facebook">
+      <%= image_tag('facebook_button.png')%>
+    </a>
+    <p style="margin-top:20px">We are starting with facebook to make it easy to find your friends</p>
+  <% end %>
+</div>
+
+<hr>
+
+<div class="row-fluid marketing">
+  <div class="span6">
+    <%#= @users.size  %>
+    <h4>Featured Bob Father</h4>
+    <p>
+      <%= render :partial => "users/mini_profile", 
+      :locals => {:user => @users.first} if @users.first %>
+      
+    </p>
+    <!-- 
+    <h4>Subheading</h4>
+    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+    <h4>Subheading</h4>
+    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+    -->
+  </div>
+
+  <div class="span6">
+    <h4>Featured Bob Spreader</h4>
+    <p>
+      <%= render :partial => "users/mini_profile", 
+      :locals => {:user => @users[1]} if @users[1] %>
+      
+    </p>
+  </div>
+</div>
+<div class="row-fluid marketing" style="text-align:center">
+  <%= image_tag('chocolate_old_fashioned.jpg', :title=>"original image by justcooknyc on flicker")%>
+</div>
+<hr>

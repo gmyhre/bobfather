@@ -1,0 +1,80 @@
+<%= simple_form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="row-fluid marketing">
+    <div class="span12">
+      <h2>Who Told You About Bob's Donuts!</h2>
+      <p>
+        <%#= @user.bobfather.id %>
+      </p>
+      <p>
+        <%= f.input :bobfather, 
+            :label => "A.  Nobody told me about bobs. I discovered Bobs on my own. ",
+            :collection => [[User::I_AM_BOBFATHER, "I am A Bobfather.  I discovered Bobs on my own"]], 
+            :label_method => :last, 
+            :value_method => :first,
+            :as => :radio_buttons, 
+            :item_wrapper_class => 'inline',
+            :checked => true %>
+
+          <%= f.input :bobfather, 
+            :label => "B.  Select Your Bobfather from Your Friends List",
+            :collection => bobfather_selection_options(@user), 
+            :label_method => :last, 
+            :value_method => :first,
+            checked: @user.bobfather ? @user.bobfather.id : nil,
+            :as => :radio_buttons, 
+            :item_wrapper_class => 'inline'
+             %>
+          <%#= f.input :bobfather %>
+          <%= f.input :bobfather, 
+            :label => "C.  My Bobfather is not one of my facebook friends",
+            :collection => [[User::UNKNOWN_BOBFATHER, "my bobfather is not one of my facebook friends"]], 
+            :label_method => :last, 
+            :value_method => :first,
+            :as => :radio_buttons, 
+            :item_wrapper_class => 'inline',
+            :checked => true %>
+      </p>
+
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row-fluid marketing">
+    <div class="span12">
+      <h2>Who Did You Introduce To Bobs Donuts</h2>
+      <p>
+          <%= f.input :bobchildren, 
+            :label => "Select Your Bobchildren from Your Friends List",
+            :collection => bobfather_selection_options(@user), 
+            :label_method => :last, 
+            :value_method => :first,
+            :as => :check_boxes, 
+            :item_wrapper_class => 'inline',
+            checked: @user.bobchildren.collect{|x| x.id} %>
+      </p>
+    </div>
+
+  </div>
+  <div style="text-align:center">
+    <%= f.submit "Submit", :class => "btn btn-primary btn-large", :style=> ""%>
+  </div>
+  
+
+
+
+
+<% end %>

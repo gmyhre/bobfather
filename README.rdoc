@@ -1,0 +1,25 @@
+TODO
+--------------------------------------------------------------------------------
+Fill out the form we pre filled values
+--------------------------------------------------------------------------------
+#cheatsheet
+
+u1.rels(:incoming, :bobfather).to_other(u2)
+
+u1.bobfather = u2
+same as
+
+
+destroy and delete
+
+The destroy and delete method works like the Active Record methods.
+
+rel = p1.rels(:friends).find{|rel| rel.end_node == p3}
+rel.destroy
+
+p1.friends.find(p2).delete
+You can also delete the relationship object like this.
+
+p1.friends.delete(p2)
+
+https://github.com/andreasronge/neo4j/wiki/Neo4j%3A%3ACore-Traverse

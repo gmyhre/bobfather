@@ -1,0 +1,19 @@
+<p>
+  <%= image_tag(user.fb_image_url, :class => "pull-left", :style => 'padding-right:5px')%>
+  <small>
+    <!--
+  <p>
+    <%# if user.lineage_total > 0 %>
+      <%#= user.lineage_total %> Bob's Progeny
+    <%# end %>
+  </p> -->
+  <p>
+    <% if user.bobchildren.count > 0 %>
+      <%= user.bobchildren.count %> bobchildren
+    <% end %>
+  </p>
+  </small>
+</p>
+<p>
+  <%= link_to user.name, user_path(user) %>
+</p>

@@ -1,0 +1,14 @@
+<h1><%= @user.name if @user %> <%= @points%></h1>
+
+<p>
+  <% @users.each do |u| %>
+    <p>
+      Name: <%= u.name %>
+      <% if u.bobfather %>
+        <br />Bobfather: <%= u.bobfather.name %> <br /> state: <%= u.bobfather_rel[:state] %><br />
+      <%= link_to 'Destroy', bobfather_path(u, :bobfather_id => u.bobfather), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </p>
+  <% end %>
+</p>
+<%= link_to 'New Bobfather Relation', new_bobfather_path %>

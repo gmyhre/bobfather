@@ -1,0 +1,10 @@
+<h1>Editing user</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', users_path %>
+<p style ="margin:50px 0">
+<%= link_to "Get Friends From Facebook", 
+  facebook_friends_user_path(@user) %>
+</p>

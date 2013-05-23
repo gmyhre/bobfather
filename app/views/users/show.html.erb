@@ -1,0 +1,61 @@
+
+<hr>
+
+<div class="jumbotron">
+  <p>
+    <%= image_tag(@user.fb_image_url('large') ) %>
+  </p>
+  <p>
+    <h1><%= @user.name %></h1>
+
+  </p>
+  <p>
+    <% if @user.lineage_total > 0 %>
+      <%= @user.lineage_total %> Bob's Progeny
+    <% end %>
+  </p>
+  <p>
+    <% if @user.bobchildren.count > 0 %>
+      <%= @user.bobchildren.count %> bobchildren
+    <% end %>
+  </p>
+
+  <p>
+    <% if !@user.registered? %>
+    <b> <%= @user.name %> has not signed up yet.  Invite them</b>
+    <% end %>
+  </p>
+
+  
+</div>
+<p class="lead"><%= @user.name %>'s Bobfather</p>
+
+<p>
+  <% if @user.bobfather %>
+    <%= render :partial => "users/mini_profile", 
+    :locals => {:user => @user.bobfather}%>
+  <% else %>
+    <%= @user.bobfather_status %>
+  <% end %>
+</p>
+
+<hr>
+<p class="lead"><%= @user.name %>'s Bobchildren</p>
+
+<div class="row">
+  <% if @user.has_bobchildren? %>
+    <% @user.bobchildren.each do |user| %>
+      <div class="span3">
+        <%= render :partial => "users/mini_profile", 
+        :locals => {:user => user}%>
+      </div>
+    <% end %>
+  <% else %>
+    This User has no Bobchildren.  His/Her Lineage Stops here
+  <% end %>
+</div>
+<hr>
+
+
+
+<%#= link_to 'Back', users_path %>

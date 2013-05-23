@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <%= image_tag(@user.fb_image_url)%>
+</p>
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>Fbid:</b>
+  <%= @user.fbid %>
+</p>
+
+<p>
+  <b>Registered:</b>
+  <%= @user.registered %>
+  <b> new_registration?</b>
+  <%= @user.new_registration? %>
+</p>
+<p>
+  <b>fb_access_token:</b>
+  <%= @user.fb_access_token %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+<p>
+  <b>Friends List:</b>
+
+</p>
+
+<% @user.friends.each do |f| %>
+  <p>
+    <%= link_to f.name, user_path(f) %>
+  </p>
+<% end %>
