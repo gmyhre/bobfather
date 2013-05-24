@@ -84,6 +84,7 @@ GEM
     neo4j-cypher (1.0.0)
     neo4j-wrapper (2.2.3-java)
       neo4j-core (= 2.2.3)
+    newrelic_rpm (3.6.2.96)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -100,6 +101,8 @@ GEM
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    puma (2.0.1)
+      rack (>= 1.1, < 2.0)
     puma (2.0.1-java)
       rack (>= 1.1, < 2.0)
     rack (1.4.5)
@@ -173,6 +176,7 @@ DEPENDENCIES
   jruby-openssl (= 0.7.7)
   neo4j
   neo4j-admin
+  newrelic_rpm
   omniauth
   omniauth-facebook
   puma
