@@ -17462,3 +17462,24 @@ Storage files: (filename : modification date - size)
       store_lock: 2013-05-16T12:31:03-0700 - 0.00 B
       tm_tx_log.1: 2013-05-22T13:27:16-0700 - 29.13 kB
       tm_tx_log.2: 2013-05-23T18:31:10-0700 - 0.00 B
+2013-05-24 01:31:10.749+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles END ---
+2013-05-24 01:31:10.752+0000 INFO  [org.neo4j]: Started - database is now available
+2013-05-24 01:31:10.753+0000 INFO  [org.neo4j]: GC Monitor started. 
+2013-05-24 01:33:46.709+0000 INFO  [org.neo4j]: Stopping - database is now unavailable
+2013-05-24 01:33:46.711+0000 INFO  [org.neo4j]: GC Monitor stopped. 
+2013-05-24 01:33:46.741+0000 INFO  [org.neo4j]: Closed log /Users/graham/rails3/bobfather/db/neo4j-development/index/lucene.log
+2013-05-24 01:33:46.744+0000 INFO  [org.neo4j]: TM shutting down
+2013-05-24 01:33:46.746+0000 INFO  [org.neo4j]: Closed log /Users/graham/rails3/bobfather/db/neo4j-development/nioneo_logical.log
+2013-05-24 01:33:46.747+0000 INFO  [org.neo4j]: /Users/graham/rails3/bobfather/db/neo4j-development/neostore.relationshiptypestore.db.names hit=0 miss=8 switches=0 ooe=0
+2013-05-24 01:33:46.749+0000 INFO  [org.neo4j]: /Users/graham/rails3/bobfather/db/neo4j-development/neostore.relationshiptypestore.db hit=0 miss=4 switches=0 ooe=0
+2013-05-24 01:33:46.750+0000 INFO  [org.neo4j]: /Users/graham/rails3/bobfather/db/neo4j-development/neostore.propertystore.db.strings hit=12 miss=0 switches=0 ooe=0
+2013-05-24 01:33:46.751+0000 INFO  [org.neo4j]: /Users/graham/rails3/bobfather/db/neo4j-development/neostore.propertystore.db.index.keys hit=0 miss=22 switches=0 ooe=0
+2013-05-24 01:33:46.752+0000 INFO  [org.neo4j]: /Users/graham/rails3/bobfather/db/neo4j-development/neostore.propertystore.db.index hit=0 miss=11 switches=0 ooe=0
+2013-05-24 01:33:46.753+0000 INFO  [org.neo4j]: /Users/graham/rails3/bobfather/db/neo4j-development/neostore.propertystore.db.arrays hit=2 miss=0 switches=0 ooe=0
+2013-05-24 01:33:46.755+0000 INFO  [org.neo4j]: /Users/graham/rails3/bobfather/db/neo4j-development/neostore.propertystore.db hit=648 miss=0 switches=0 ooe=0
+2013-05-24 01:33:46.762+0000 INFO  [org.neo4j]: /Users/graham/rails3/bobfather/db/neo4j-development/neostore.relationshipstore.db hit=538 miss=0 switches=0 ooe=0
+2013-05-24 01:33:46.766+0000 INFO  [org.neo4j]: /Users/graham/rails3/bobfather/db/neo4j-development/neostore.nodestore.db hit=435 miss=0 switches=0 ooe=0
+2013-05-24 01:33:46.769+0000 INFO  [org.neo4j]: /Users/graham/rails3/bobfather/db/neo4j-development/neostore hit=0 miss=17 switches=0 ooe=0
+2013-05-24 01:33:46.771+0000 INFO  [org.neo4j]: NeoStore closed
+2013-05-24 01:33:46.771+0000 INFO  [org.neo4j]: --- STOPPING diagnostics START ---
+2013-05-24 01:33:46.772+0000 INFO  [org.neo4j]: --- STOPPING diagnostics END ---
