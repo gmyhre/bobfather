@@ -100,6 +100,8 @@ GEM
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    puma (2.0.1-java)
+      rack (>= 1.1, < 2.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -173,6 +175,7 @@ DEPENDENCIES
   neo4j-admin
   omniauth
   omniauth-facebook
+  puma
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   simple_form
