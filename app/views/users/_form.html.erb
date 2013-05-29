@@ -13,12 +13,11 @@
 
 
   <div class="row-fluid marketing">
-    <div class="span12">
+    <div class="span12" style="max-height:350px;overflow-y:scroll">
       <h2>Who Told You About Bob's Donuts!</h2>
       <p>
         <%#= @user.bobfather.id %>
       </p>
-      <p>
         <%= f.input :bobfather, 
             :label => "A.  Nobody told me about bobs. I discovered Bobs on my own. ",
             :collection => [[User::I_AM_BOBFATHER, "I am A Bobfather.  I discovered Bobs on my own"]], 
@@ -46,15 +45,13 @@
             :as => :radio_buttons, 
             :item_wrapper_class => 'inline',
             :checked => true %>
-      </p>
-
     </div>
   </div>
 
   <hr>
 
   <div class="row-fluid marketing">
-    <div class="span12">
+    <div class="span12" style="max-height:350px;overflow-y:scroll">
       <h2>Who Did You Introduce To Bobs Donuts</h2>
       <p>
           <%= f.input :bobchildren, 

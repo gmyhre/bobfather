@@ -32,19 +32,20 @@
         <ul class="nav nav-pills pull-right">
           <% if logged_in? %>
             <li>
-              <%= link_to(image_tag(
+              <%#= link_to(image_tag(
                     current_user.fb_image_url,
                     :class => "headerTinymanPhoto avatarPhoto",
                     :title => current_user.name), user_path(current_user) 
                   ) 
               %>
+              <%= link_to( current_user.name, user_path(current_user) ) 
+              %>
+
             </li>
           <% else %>
             <li class="active"><a href="/">Home</a></li>
           <% end %>
           <li><a href="/about">About</a></li>
-          
-          
           
           <% if logged_in? %>
             <li><%= link_to 'Edit Profile', edit_user_path(current_user) %>
