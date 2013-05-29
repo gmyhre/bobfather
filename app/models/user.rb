@@ -20,6 +20,39 @@ class User < Neo4j::Rails::Model
   attr_accessible :fbid, :name, :email, :registered, :is_bobfather
   attr_accessible :bobchildren
   
+  def related?(user)
+    self.relation(user).count > 0
+   end
+
+  # Todo
+  # figure out how to exit the search after a found path?
+  # end_node.id == user.id should work, but doesn't
+  def relation(user)
+    traversal = self.both(:bobfather).depth(:all).unique(:node_path).eval_paths { |path|  (path.end_node[:fbid] == user[:fbid]) ? :include_and_continue : :exclude_and_continue }
+    # self.both(:bobfather).depth(:all).filter{|path| path.end_node.rel?(:recommend, :incoming)}.
+    #     each{|node| puts node[:name]}
+    
+    #traversal = self.both(:bobfather).depth(:all).unique(:node_path).eval_paths { |path|  puts path.end_node ; puts path.end_node.id ; :include_and_continue }
+    
+    
+    
+    # traversal = self.both(:bobfather).depth(:all).unique(:node_path).eval_paths { |path|  :include_and_continue }
+    # traversal = u1.both(:bobfather).depth(:all).unique(:node_path).eval_paths { |path|  :include_and_continue }
+    return traversal
+    # This prints out
+    #Path A->B
+    #Path A->C
+    #Path A->B->C
+    #Path A->B->D
+    #Path A->C->B
+    #Path A->C->D
+    #Path A->B->C->D
+    #Path A->C->B->D
+
+    
+  end
+
+
   def has_bobchildren?
     self.incoming(:bobfather).count > 0
   end

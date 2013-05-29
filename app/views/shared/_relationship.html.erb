@@ -1,0 +1,43 @@
+<% if logged_in? and current_user.related?(@user) %>
+  <h3>
+    <% current_user.relation(@user).paths.each do |path| %>
+    <% path.each do |p| %>
+      <%#= p.inspect %><br />
+      <% if p.class == Neo4j::Node %>
+      <% end %>
+      <% if p.class == Neo4j::Relationship %>
+        
+        <% n1 = p.get_start_node %>
+        <% n2 = p.get_end_node %>
+        <% if n1[:fbid] == current_user[:fbid] %>
+          You were
+        <% else %>
+          <%= link_to n1[:name], user_path(n1.id) %> was
+        <% end %>
+        
+         introduced to Bob's Donuts by
+        
+         <% if n2[:fbid] == current_user[:fbid] %>
+           You
+         <% else %>
+           <%= link_to n2[:name], user_path(n2.id) %>.
+         <% end %>
+      
+      <% end %>
+
+    <% end %>
+
+    <%# p = path.map{|p| p[:name]}.compact.join('->') %>
+    <%#= "Path #{p.to_s}" %>
+    <% end %>
+  </h3>
+<% elsif logged_in? and @user == current_user %>
+  <!-- <h3>Your Profile</h3> -->
+<% else %>
+  You and <%= @user.name %> are not Bob's Donuts relations ... Yet!
+<% end %>
+<hr />
+
+
+
+

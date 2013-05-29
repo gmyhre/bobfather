@@ -31,7 +31,14 @@
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <% if logged_in? %>
-            <li class="active"><%= link_to @user.name, user_path(@user) %></li>
+            <li>
+              <%= link_to(image_tag(
+                    current_user.fb_image_url,
+                    :class => "headerTinymanPhoto avatarPhoto",
+                    :title => current_user.name), user_path(current_user) 
+                  ) 
+              %>
+            </li>
           <% else %>
             <li class="active"><a href="/">Home</a></li>
           <% end %>

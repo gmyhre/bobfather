@@ -19,7 +19,7 @@
     <%#= @users.size  %>
     <h4>Featured Bob Father</h4>
     <p>
-      <%= render :partial => "users/mini_profile", 
+      <%= render :partial => "users/profile", 
       :locals => {:user => @users.first} if @users.first %>
       
     </p>
@@ -35,7 +35,7 @@
   <div class="span6">
     <h4>Featured Bob Spreader</h4>
     <p>
-      <%= render :partial => "users/mini_profile", 
+      <%= render :partial => "users/profile", 
       :locals => {:user => @users[1]} if @users[1] %>
       
     </p>
