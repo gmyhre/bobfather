@@ -1,4 +1,3 @@
-
 <hr>
 
 <div class="jumbotron">
@@ -31,16 +30,31 @@
 
   
 </div>
-<p class="lead"><%= @user.name %>'s Bobfather</p>
+<div class="row-fluid marketing">
+  <div class="span6">
+    <p class="lead"><%= @user.name %>'s Bobfather</p>
 
-<p>
-  <% if @user.bobfather %>
-    <%= render :partial => "users/mini_profile", 
-    :locals => {:user => @user.bobfather}%>
-  <% else %>
-    <%= @user.bobfather_status %>
-  <% end %>
-</p>
+    <p>
+      <% if @user.bobfather %>
+        <%= render :partial => "users/mini_profile", 
+        :locals => {:user => @user.bobfather}%>
+      <% else %>
+        <%= @user.bobfather_status %>
+      <% end %>
+    </p>
+  </div>
+  <div class="span6">
+    <p class="lead">Bobfather of <%= @user.name %>'s Lineage</p>
+    <p>
+      <% if @user.bobfather %>
+        <%= render :partial => "users/mini_profile", 
+        :locals => {:user => @user.don_bobfather}%>
+      <% else %>
+        <%= @user.bobfather_status %>
+      <% end %>
+    </p>
+  </div>
+</div>
 
 <hr>
 <p class="lead"><%= @user.name %>'s Bobchildren</p>

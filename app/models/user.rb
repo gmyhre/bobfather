@@ -3,11 +3,16 @@ class User < Neo4j::Rails::Model
   property :email, :type => String
   property :fbid, :type => String, :index => :exact, :unique => true
   property :registered, :type => :boolean, :default => false #, :index => :exact
-  property :is_bobfather, :type => :boolean, :default => false
+  
   property :fb_access_token, :type => String
   property :favorite_donut, :type => String, :index => :exact
   property :last_login, :type => Time
   property :state, :type => String, :index => :exact
+  # use this as an explicity indication of Bobfatherhood by the user
+  property :is_bobfather, :type => :boolean, :default => false
+  # use this as a property for traversal
+  # property :has_bobfather, :type => :boolean, :default => false
+  
   
   has_one(:bobfather)
   has_n(:friends)
@@ -20,9 +25,13 @@ class User < Neo4j::Rails::Model
   attr_accessible :fbid, :name, :email, :registered, :is_bobfather
   attr_accessible :bobchildren
   
+  def has_bobfather?
+    self.bobfather ? true : false
+  end
+  
   def related?(user)
     self.relation(user).count > 0
-   end
+  end
 
   # Todo
   # figure out how to exit the search after a found path?
@@ -33,25 +42,17 @@ class User < Neo4j::Rails::Model
     #     each{|node| puts node[:name]}
     
     #traversal = self.both(:bobfather).depth(:all).unique(:node_path).eval_paths { |path|  puts path.end_node ; puts path.end_node.id ; :include_and_continue }
-    
-    
-    
     # traversal = self.both(:bobfather).depth(:all).unique(:node_path).eval_paths { |path|  :include_and_continue }
     # traversal = u1.both(:bobfather).depth(:all).unique(:node_path).eval_paths { |path|  :include_and_continue }
     return traversal
-    # This prints out
-    #Path A->B
-    #Path A->C
-    #Path A->B->C
-    #Path A->B->D
-    #Path A->C->B
-    #Path A->C->D
-    #Path A->B->C->D
-    #Path A->C->B->D
-
-    
   end
 
+  # who is the bobfather at the top of the lineage
+  def don_bobfather
+    #traversal = self.outgoing(:bobfather).depth(:all).unique(:node_path).eval_paths { |path|  (path.end_node[:fbid] == user[:fbid]) ? :include_and_continue : :exclude_and_continue }
+    traversal = self.outgoing(:bobfather).depth(:all).to_a.last #.   #filter{|path| path.end_node.has_bobfather?}.
+      #   each{|node| puts node[:name]}
+  end
 
   def has_bobchildren?
     self.incoming(:bobfather).count > 0
@@ -108,7 +109,9 @@ class User < Neo4j::Rails::Model
   end
   
   def bobfather_status
-    "No Bobfather"
+    plug = ''
+    plug = ".  Invite them to sign up" if not registered?
+    return "#{self.name } is the bobfather#{plug}"
   end
   
   def update_from_fb_omniuath(auth)

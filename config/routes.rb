@@ -9,6 +9,7 @@ Bobfather::Application.routes.draw do
   # match 'welcome/onboarding' => 'welcome#onboarding'
 
   match 'logout' => 'sessions#destroy', :as => :logout
+  match 'about' => 'welcome#about', :as => :logout
   
   resources :bobfathers
 
