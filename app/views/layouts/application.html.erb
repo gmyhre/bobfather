@@ -32,13 +32,14 @@
         <ul class="nav nav-pills pull-right">
           <% if logged_in? %>
             <li>
-              <%#= link_to(image_tag(
+              <%= link_to(image_tag(
                     current_user.fb_image_url,
                     :class => "headerTinymanPhoto avatarPhoto",
+                    :style=> "padding:0px;margin:0px",
                     :title => current_user.name), user_path(current_user) 
                   ) 
               %>
-              <%= link_to( current_user.name, user_path(current_user) ) 
+              <%#= link_to( current_user.name, user_path(current_user) ) 
               %>
 
             </li>
