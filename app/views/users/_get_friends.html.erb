@@ -1,0 +1,17 @@
+<div id="get_friends">
+  <h2>Who Told You About Bob's Donuts!</h2>
+  <p class="lead">
+    Importing Your Friend List ...
+    <p style="text-align:center">
+      <%= image_tag("spinnerLarge.gif") %>
+    </p>
+  </p>
+</div>
+<script>
+  $(document).ready(function () {
+    $.ajax({
+      url: "/users/<%= @user.id %>/facebook_friends.js",
+      type: "GET",
+    });
+  });  
+</script>

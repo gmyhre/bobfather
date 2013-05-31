@@ -1,6 +1,8 @@
 
 <hr>
-
-<%= render 'users/form' %>
-
+<% if @user.has_friends? %>
+  <%= render 'users/form' %>
+<% else %>
+  <%= render 'users/get_friends' %>  
+<% end %>
 <hr>

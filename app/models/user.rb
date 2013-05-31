@@ -124,17 +124,32 @@ class User < Neo4j::Rails::Model
     self.name = uinfo['name']
   end
 
-  def get_fb_friends
+  def has_friends?
+    !self.friends.empty?
+  end
+
+  def get_fb_friends    
     fb_user = FbGraph::User.me(self.fb_access_token)
     friends = fb_user.friends
     friends.each do |f|
+      # puts("f.identifier::#{f.identifier} pre search")
       node = User.find(:fbid => f.identifier)
       if !node
+        puts("f.identifier::#{f.identifier} not found")
         node = User.create(:fbid => f.identifier)
+      else
+        # puts an old friend
       end
       node.name = f.name if !node.name
       node.save # has to be here to persist friends name
-      self.friends << node
+      if self.friends.include?(node)
+        puts "already a friend #{node.name}"
+      else
+        puts "adding a friend #{node.name}"
+        self.friends << node
+        
+      end
+      
     end
     save
   end

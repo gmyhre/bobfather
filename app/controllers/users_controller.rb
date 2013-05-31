@@ -4,7 +4,12 @@ class UsersController < ApplicationController
   def facebook_friends
     @user = User.find(params[:id])
     @user.get_fb_friends
-    redirect_to @user, :notice => "updated facebook friends list" and return
+    respond_to do |format|
+      format.html {redirect_to edit_user_path(@user), :notice => "updated facebook friends list" and return}
+      format.js {}
+    end
+
+    
   end
 
   # GET /users
