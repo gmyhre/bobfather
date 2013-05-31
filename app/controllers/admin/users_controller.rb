@@ -7,6 +7,12 @@ class Admin::UsersController < AdminController
     redirect_to @user, :notice => "updated facebook friends list" and return
   end
 
+  def start_over
+    User.all.each {|x| x.destroy}
+    redirect_to admin_users_path, :notice => "destroyed all users"
+  end
+
+
   # GET /users
   # GET /users.json
   def index

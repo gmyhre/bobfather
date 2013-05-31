@@ -21,6 +21,8 @@ Bobfather::Application.routes.draw do
   namespace :admin do
     resources :users do
       get "facebook_friends", :on => :member
+      get "start_over", :on => :collection
+      
     end
   end
 

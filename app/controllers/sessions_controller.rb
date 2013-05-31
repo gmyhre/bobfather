@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
     # doesn't hit db, no save
     user.update_from_fb_omniuath(auth)
     if user.new_registration?
-      user.get_fb_friends
+      # doing this on the show page
+      # user.get_fb_friends
     end
     # Rails.logger.info("\n\nFacebook User::#{user.fbid}\n")
     user.registered = true
