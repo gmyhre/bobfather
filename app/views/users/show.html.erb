@@ -32,7 +32,7 @@
 </div>
 <div class="row-fluid marketing">
   <div class="span6">
-    <p class="lead"><%= @user.name %>'s Bobfather</p>
+    <p class="lead"><%= possesive_helper(@user) %> Bobfather</p>
 
     <p>
       <% if @user.bobfather %>
@@ -44,7 +44,7 @@
     </p>
   </div>
   <div class="span6">
-    <p class="lead">Bobfather of <%= @user.name %>'s Lineage</p>
+    <p class="lead">Bobfather of <%= possesive_helper(@user) %> Lineage</p>
     <p>
       <% if @user.bobfather %>
         <%= render :partial => "users/mini_profile", 
@@ -57,7 +57,7 @@
 </div>
 
 <hr>
-<p class="lead"><%= @user.name %>'s Bobchildren</p>
+<p class="lead"><%= possesive_helper(@user) %> Bobchildren</p>
 
 <div class="row">
   <% if @user.has_bobchildren? %>

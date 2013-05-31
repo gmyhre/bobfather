@@ -21,6 +21,10 @@ class User < Neo4j::Rails::Model
   I_AM_BOBFATHER = '-1'
 
   FEATUREALBE = "featurable"
+  ## States of Relationship.  
+  PROPOSED_BY_FATHER = 'proposed_by_father'
+  PROPOSED_BY_CHILD = 'proposed_by_child'
+  CONFIRMED = 'confirmed'
   
   attr_accessible :fbid, :name, :email, :registered, :is_bobfather
   attr_accessible :bobchildren
@@ -66,28 +70,49 @@ class User < Neo4j::Rails::Model
     self.incoming(:bobfather).depth(:all).count
   end
 
-
-  # business logic of who gets to delete what can go here
-  def update_bobchildren(bobchildren_ids)
-    bobchildren_ids.reject! {|x| x.empty? }
+  # remove the Unchecked Checkboxes
+  def remove_bobchild_relationships(bobchildren_ids)
     existing_bobchildren_ids = bobchildren.collect {|x| x.id}
     delete_child_relaitonships = existing_bobchildren_ids - bobchildren_ids
     Rails.logger.info("existing_bobchildren::#{existing_bobchildren_ids}")
-    Rails.logger.info("delete_child_relaitonships::#{delete_child_relaitonships}")
-    
     delete_child_relaitonships.each do |uid|
       u = User.find(uid)
       u.bobfather_rel.destroy
     end
-    
+  end
+
+  # State Machine Logic Applies here
+  ## TOOD Refactor somewhere nice
+  def add_bobchild_reationships(bobchildren_ids)
     bobchildren_ids.each do |child_id|
       u = User.find(child_id)
-      u.bobfather = self 
-      # do state machine
-      u.bobfather_rel[:state] = 'proposed by father'
+      if u.has_bobfather?
+        # This is A CONFIRMATION of the bobfatherhood 
+        if ( (u.bobfather == self) and 
+              (u.bobfather_rel[:state]  == PROPOSED_BY_CHILD) )
+          u.bobfather_rel[:state] = CONFIRMED
+        end
+        # if u.bobfather != self DO NOTHING b/c da child has ownship of 
+        #  WHO IS MY BOBFATHER      
+      else
+        u.bobfather = self 
+        # do state machine
+        u.bobfather_rel[:state] = PROPOSED_BY_FATHER
+      end
       u.save
     end
   end
+  
+  # business logic of who gets to delete what can go here
+  def update_bobchildren(bobchildren_ids)
+    bobchildren_ids.reject! {|x| x.empty? }
+    
+    remove_bobchild_relationships(bobchildren_ids)
+    # add the newly checked children
+    add_bobchild_reationships(bobchildren_ids)
+  end
+
+
 
   
   def update_bobfather(bobfather_id)
@@ -101,7 +126,11 @@ class User < Neo4j::Rails::Model
       u = User.find(bobfather_id)
       self.bobfather = u
       # do state machine
-      self.bobfather_rel[:state] = 'proposed'
+      if self.bobfather_rel[:state] and self.bobfather_rel[:state] == PROPOSED_BY_FATHER
+        self.bobfather_rel[:state] = CONFIRMED
+      else
+        self.bobfather_rel[:state] = PROPOSED_BY_CHILD
+      end
       save
     else
       Rails.logger.info("User has no Bobfather")
